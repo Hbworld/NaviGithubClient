@@ -10,17 +10,17 @@ import kotlinx.coroutines.launch
 class ParentViewModel(private val githubRepository: GithubRepository) :
     ViewModel() {
 
-    fun getAllClosedPR(): LiveData<List<FetchCPRResponse>> {
-        val result = MutableLiveData<List<FetchCPRResponse>>()
+    val closedPRList = MutableLiveData<List<FetchCPRResponse>>()
+
+    fun getAllClosedPR(){
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                result.postValue(githubRepository.getAllClosedPR())
+                closedPRList.postValue(githubRepository.getAllClosedPR())
             } catch (e: Exception) {
                 Log.e("getAllClosedPR", e.printStackTrace().toString())
             }
         }
 
-        return result
     }
 
 }
