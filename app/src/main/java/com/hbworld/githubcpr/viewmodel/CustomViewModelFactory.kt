@@ -2,7 +2,7 @@ package com.hbworld.githubcpr.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.hbworld.githubcpr.data.repository.GithubRepository
+import com.hbworld.githubcpr.domain.GithubRepository
 
 class CustomViewModelFactory(private val githubRepository: GithubRepository) : ViewModelProvider.Factory {
 

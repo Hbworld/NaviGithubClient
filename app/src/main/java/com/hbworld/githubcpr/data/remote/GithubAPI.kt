@@ -1,6 +1,6 @@
 package com.hbworld.githubcpr.data.remote
 
-import com.hbworld.githubcpr.data.model.FetchCPRResponse
+import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
