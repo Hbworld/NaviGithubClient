@@ -3,4 +3,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="pr_id">#%s</string>
+    <string name="enter_repo_owner">Enter Repo Owner</string>
+    <string name="enter_repo_name">Enter Repo Name</string>
+    <string name="let_s_fetch_it">Let\'s fetch it</string>
 </resources>
