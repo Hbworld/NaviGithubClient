@@ -17,8 +17,8 @@ class GithubRepositoryImpl(
 
 
     private suspend fun getAllPR(
-        owner: String = "linkedin",
-        repo: String = "LiTr",
+        owner: String = "Hbworld",
+        repo: String = "NaviGithubClient",
         state: String = "closed",
     ): List<FetchCPRResponse> {
         return githubAPI.fetchPullRequest(

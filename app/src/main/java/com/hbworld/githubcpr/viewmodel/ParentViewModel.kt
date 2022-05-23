@@ -12,15 +12,18 @@ class ParentViewModel(private val githubRepository: GithubRepository) :
 
     val closedPRList = MutableLiveData<List<ClosedPR>>()
 
-    fun getAllClosedPR(){
+    fun getAllClosedPR() : LiveData<Result<Boolean>>{
+        val result = MutableLiveData<Result<Boolean>>()
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 closedPRList.postValue(githubRepository.getAllClosedPRs())
+                result.postValue(Result.success(true))
             } catch (e: Exception) {
+                result.postValue(Result.failure(e))
                 Log.e("getAllClosedPR", e.toString())
             }
         }
-
+        return result
     }
 
 }

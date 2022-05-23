@@ -26,6 +26,7 @@ object BindingAdapterUtil {
             if (adapter == null && adapter !is PRAdapter) {
                 adapter = PRAdapter(prList)
                 recyclerView.adapter = adapter
+                recyclerView.scheduleLayoutAnimation()
             } else if (adapter is PRAdapter) {
                 adapter.updateList(prList)
             }
