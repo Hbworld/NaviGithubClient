@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tool="http://schemas.android.com/tools">
 
@@ -10,87 +8,75 @@
         <variable
             name="pr"
             type="com.hbworld.githubcpr.domain.model.ClosedPR" />
-
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="6dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="8dp">
 
-            <TextView
-                android:id="@+id/tv_pr_id"
-                android:text="@{@string/pr_id(pr.id)}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
+            <ImageView
+                android:id="@+id/iv_pr_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/ic_pull_request"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tool:text="#786" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_pr_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:ellipsize="end"
+                android:gravity="start"
+                android:maxLines="2"
                 android:text="@{pr.title}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pr_id"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_pr_icon"
+                app:layout_constraintEnd_toStartOf="@+id/iv_author_image"
+                app:layout_constraintStart_toEndOf="@+id/iv_pr_icon"
+                app:layout_constraintTop_toTopOf="@+id/iv_pr_icon"
                 tool:text="Pull Request Title" />
-
-            <ImageView
-                android:id="@+id/iv_author_image"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                imageUrl="@{pr.authorImage}"
-                app:layout_constraintEnd_toStartOf="@+id/tv_author_name"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pr_title"
-                tool:src="@mipmap/ic_launcher_round" />
-
-            <TextView
-                android:id="@+id/tv_author_name"
-                android:text="@{pr.author}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/iv_author_image"
-                app:layout_constraintTop_toBottomOf="@+id/tv_pr_title"
-                tool:text="Item" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/barrier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:barrierDirection="bottom"
-                app:constraint_referenced_ids="iv_author_image, tv_author_name" />
+                app:constraint_referenced_ids="iv_pr_icon, tv_pr_title" />
+
 
             <TextView
-                android:id="@+id/tv_pr_created"
-                android:text="@{pr.createdAt}"
-                android:layout_width="wrap_content"
+                android:id="@+id/tv_pr_description"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toStartOf="@id/tv_pr_closed"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp"
+                android:gravity="start"
+                android:text="@{@string/pr_description(pr.id,pr.author,pr.closedAt,pr.createdAt)}"
+                app:layout_constraintEnd_toStartOf="@+id/iv_author_image"
+                app:layout_constraintStart_toStartOf="@+id/tv_pr_title"
                 app:layout_constraintTop_toBottomOf="@+id/barrier"
-                tool:text="created at - 22 May 2022" />
+                tool:text="#786 by hbworld was merged on 23 May" />
 
-            <TextView
-                android:id="@+id/tv_pr_closed"
-                android:text="@{pr.closedAt}"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <ImageView
+                android:id="@+id/iv_author_image"
+                imageUrl="@{pr.authorImage}"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_pr_created"
-                app:layout_constraintTop_toBottomOf="@+id/barrier"
-                tool:text="closed at - 23 May 2022" />
+                app:layout_constraintTop_toTopOf="parent"
+                tool:src="@mipmap/ic_launcher_round" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
