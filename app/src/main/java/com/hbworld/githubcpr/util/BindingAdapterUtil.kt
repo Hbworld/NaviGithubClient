@@ -4,6 +4,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import coil.transform.CircleCropTransformation
 import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.view.PRAdapter
 
@@ -12,7 +13,9 @@ object BindingAdapterUtil {
     @JvmStatic
     @BindingAdapter("imageUrl")
     fun bindSrc(imageView: ImageView, imageUrl : String) {
-        imageView.load(imageUrl)
+        imageView.load(imageUrl){
+            transformations(CircleCropTransformation())
+        }
     }
 
     @JvmStatic

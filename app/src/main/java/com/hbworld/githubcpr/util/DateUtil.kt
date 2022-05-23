@@ -1,12 +1,14 @@
 package com.hbworld.githubcpr.util
 
 import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.Period
 import java.util.*
 
 object DateUtil {
 
     private const val GITHUB_DATE_PATTERN = "yyyy-MM-dd'T'HH:mm:ssXXX"
-    private const val SIMPLE_DATE_PATTERN = "dd MMM yy hh:mm a"
+    private const val SIMPLE_DATE_PATTERN = "dd MMM yy "
 
     fun formatGithubDateToSimple(dateString: String) : String{
         val date = parseGithubDate(dateString)
