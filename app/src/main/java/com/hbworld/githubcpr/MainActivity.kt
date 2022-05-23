@@ -2,6 +2,8 @@ package com.hbworld.githubcpr
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.hbworld.githubcpr.data.mapper.ClosedPRMapper
@@ -20,14 +22,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val customViewModelFactory = CustomViewModelFactory(
-            GithubRepositoryImpl(
-                RetrofitClient.get().create(GithubAPI::class.java),
-                ClosedPRMapper()
-            )
-        )
         parentViewModel =
-            ViewModelProvider(this, customViewModelFactory)[ParentViewModel::class.java]
+            ViewModelProvider(this, getCustomViewModelFactory())[ParentViewModel::class.java]
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         dataBinding.lifecycleOwner = this
         dataBinding.viewmodel = parentViewModel
@@ -35,7 +31,21 @@ class MainActivity : AppCompatActivity() {
         fetchData()
     }
 
+    private fun getCustomViewModelFactory(): CustomViewModelFactory {
+        return CustomViewModelFactory(
+            GithubRepositoryImpl(
+                RetrofitClient.get().create(GithubAPI::class.java),
+                ClosedPRMapper()
+            )
+        )
+    }
+
     private fun fetchData() {
-        parentViewModel.getAllClosedPR()
+        dataBinding.progress.visibility = View.VISIBLE
+        parentViewModel.getAllClosedPR().observe(this) { result ->
+            dataBinding.progress.visibility = View.GONE
+            if (result.isFailure) Toast.makeText(this, R.string.fetch_error, Toast.LENGTH_LONG)
+                .show()
+        }
     }
 }

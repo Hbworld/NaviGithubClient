@@ -2,4 +2,5 @@
     <string name="app_name">Navi Github Client</string>
     <string name="pr_created_at">created on %s</string>
     <string name="pr_description">#%s by %s\nmerged on %s\ncreated on %s</string>
+    <string name="fetch_error">Please check your internet connection or try again later</string>
 </resources>
