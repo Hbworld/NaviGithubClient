@@ -9,7 +9,7 @@
 
         <variable
             name="pr"
-            type="com.hbworld.githubcpr.data.model.FetchCPRResponse" />
+            type="com.hbworld.githubcpr.domain.model.ClosedPR" />
 
     </data>
 
@@ -27,7 +27,7 @@
 
             <TextView
                 android:id="@+id/tv_pr_id"
-                android:text="@{@string/pr_id(pr.number)}"
+                android:text="@{@string/pr_id(pr.id)}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -49,7 +49,7 @@
                 android:id="@+id/iv_author_image"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                imageUrl="@{pr.user.avatarUrl}"
+                imageUrl="@{pr.authorImage}"
                 app:layout_constraintEnd_toStartOf="@+id/tv_author_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_pr_title"
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/tv_author_name"
-                android:text="@{pr.user.login}"
+                android:text="@{pr.author}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"

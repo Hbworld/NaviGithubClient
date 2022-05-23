@@ -1,10 +1,10 @@
-package com.hbworld.githubcpr.view.util
+package com.hbworld.githubcpr.util
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.hbworld.githubcpr.data.model.FetchCPRResponse
+import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.view.PRAdapter
 
 object BindingAdapterUtil {
@@ -17,7 +17,7 @@ object BindingAdapterUtil {
 
     @JvmStatic
     @BindingAdapter("prList")
-    fun bindPRRecyclerView(recyclerView: RecyclerView, prList : List<FetchCPRResponse>?) {
+    fun bindPRRecyclerView(recyclerView: RecyclerView, prList : List<ClosedPR>?) {
         if(prList!=null){
             var adapter = recyclerView.adapter
             if (adapter == null && adapter !is PRAdapter) {

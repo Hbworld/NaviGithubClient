@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
-import com.hbworld.githubcpr.data.model.FetchCPRResponse
 import com.hbworld.githubcpr.databinding.ItemPrCardBinding
 import com.hbworld.githubcpr.BR
+import com.hbworld.githubcpr.domain.model.ClosedPR
 
-class PRAdapter(private var prList: List<FetchCPRResponse>) :
+class PRAdapter(private var prList: List<ClosedPR>) :
     RecyclerView.Adapter<PRAdapter.PRViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PRViewHolder {
@@ -28,7 +28,7 @@ class PRAdapter(private var prList: List<FetchCPRResponse>) :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    public fun updateList(prList: List<FetchCPRResponse>) {
+    public fun updateList(prList: List<ClosedPR>) {
         this.prList = prList
         notifyDataSetChanged()
     }
@@ -37,7 +37,7 @@ class PRAdapter(private var prList: List<FetchCPRResponse>) :
     class PRViewHolder(private val dataBinding: ViewDataBinding) :
         RecyclerView.ViewHolder(dataBinding.root) {
 
-        fun bind(pr: FetchCPRResponse) {
+        fun bind(pr: ClosedPR) {
             dataBinding.setVariable(BR.pr, pr)
         }
 
