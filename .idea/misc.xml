@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.32222222222222224" />
+        <entry key="app/src/main/res/drawable/ic_pull_request.xml" value="0.1855" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/fragment_c_p_r_list.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_user_input.xml" value="0.2056159420289855" />
         <entry key="app/src/main/res/layout/item_pr_card.xml" value="0.19610507246376813" />
       </map>
     </option>

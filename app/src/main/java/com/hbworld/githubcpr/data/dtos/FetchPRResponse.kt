@@ -1,4 +1,4 @@
-package com.hbworld.githubcpr.data.model
+package com.hbworld.githubcpr.data.dtos
 
 import com.google.gson.annotations.SerializedName
 
