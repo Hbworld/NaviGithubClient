@@ -12,6 +12,7 @@ import com.hbworld.githubcpr.data.remote.RetrofitClient
 import com.hbworld.githubcpr.data.repository.GithubRepositoryImpl
 import com.hbworld.githubcpr.domain.GithubRepository
 import com.hbworld.githubcpr.databinding.ActivityMainBinding
+import com.hbworld.githubcpr.util.DependencyUtil
 import com.hbworld.githubcpr.viewmodel.CustomViewModelFactory
 import com.hbworld.githubcpr.viewmodel.ParentViewModel
 
@@ -32,12 +33,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getCustomViewModelFactory(): CustomViewModelFactory {
-        return CustomViewModelFactory(
-            GithubRepositoryImpl(
-                RetrofitClient.get().create(GithubAPI::class.java),
-                ClosedPRMapper()
-            )
-        )
+        return CustomViewModelFactory(DependencyUtil.getGithubRepository())
     }
 
     private fun fetchData() {
