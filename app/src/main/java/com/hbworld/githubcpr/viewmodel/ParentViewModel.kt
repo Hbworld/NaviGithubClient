@@ -4,10 +4,13 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.hbworld.githubcpr.domain.GithubRepository
 import com.hbworld.githubcpr.domain.model.ClosedPR
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ParentViewModel(private val githubRepository: GithubRepository) :
+@HiltViewModel
+class ParentViewModel @Inject constructor(private val githubRepository: GithubRepository) :
     ViewModel() {
 
     val closedPRList = MutableLiveData<List<ClosedPR>>()
