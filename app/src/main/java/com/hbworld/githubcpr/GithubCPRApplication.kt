@@ -1,4 +1,13 @@
 package com.hbworld.githubcpr
 
-class GithubCPRApplication {
+import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
+
+@HiltAndroidApp
+class GithubCPRApplication : Application() {
+
+
+    override fun onCreate() {
+        super.onCreate()
+    }
 }
