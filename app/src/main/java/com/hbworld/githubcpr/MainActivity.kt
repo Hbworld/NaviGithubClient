@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.hbworld.githubcpr.databinding.ActivityMainBinding
+import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.viewmodel.ParentViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleResult(result: Result<Boolean>) {
+    private fun handleResult(result: Result<List<ClosedPR>>) {
         updateProgressBar(View.GONE)
         if (result.isFailure) Toast.makeText(this, R.string.fetch_error, Toast.LENGTH_LONG)
             .show()

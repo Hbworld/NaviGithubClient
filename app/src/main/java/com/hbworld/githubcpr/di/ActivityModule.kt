@@ -1,6 +1,6 @@
 package com.hbworld.githubcpr.di
 
-import com.hbworld.githubcpr.domain.GithubRepository
+import com.hbworld.githubcpr.domain.GithubUseCase
 import com.hbworld.githubcpr.viewmodel.ParentViewModel
 import dagger.Module
 import dagger.Provides
@@ -16,9 +16,9 @@ object ActivityModule {
     @ActivityScoped
     @Provides
     fun provideMainViewModel(
-        githubRepository: GithubRepository
+        githubUseCase: GithubUseCase
     ) : ParentViewModel{
-        return ParentViewModel(githubRepository)
+        return ParentViewModel(githubUseCase)
     }
 
 

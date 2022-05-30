@@ -1,10 +1,10 @@
 package com.hbworld.githubcpr.di
 
-import com.hbworld.githubcpr.data.mapper.ClosedPRMapper
 import com.hbworld.githubcpr.data.remote.GithubAPI
 import com.hbworld.githubcpr.data.remote.RetrofitClient
-import com.hbworld.githubcpr.data.repository.GithubRepositoryImpl
-import com.hbworld.githubcpr.domain.GithubRepository
+import com.hbworld.githubcpr.data.repository.GitHubRepositoryImpl
+import com.hbworld.githubcpr.domain.GitHubRepository
+import com.hbworld.githubcpr.domain.GithubUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,10 +17,18 @@ object AppModule {
 
     @Singleton
     @Provides
+    fun provideGitHubUseCase(
+        gitHubRepository: GitHubRepository
+    ) : GithubUseCase {
+        return GithubUseCase.Impl(gitHubRepository)
+    }
+
+    @Singleton
+    @Provides
     fun provideGitHubRepository(
         githubAPI: GithubAPI,
-    ) : GithubRepository {
-        return GithubRepositoryImpl(githubAPI, ClosedPRMapper())
+    ) : GitHubRepository {
+        return GitHubRepositoryImpl(githubAPI)
     }
 
     @Singleton

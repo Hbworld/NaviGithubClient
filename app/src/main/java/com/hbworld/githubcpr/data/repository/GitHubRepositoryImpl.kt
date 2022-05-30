@@ -1,20 +1,19 @@
 package com.hbworld.githubcpr.data.repository
 
-import com.hbworld.githubcpr.data.mapper.ListMapper
-import com.hbworld.githubcpr.data.remote.GithubAPI
-import com.hbworld.githubcpr.domain.GithubRepository
-import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
+import com.hbworld.githubcpr.data.mapper.ClosedPRMapper
+import com.hbworld.githubcpr.data.remote.GithubAPI
+import com.hbworld.githubcpr.domain.GitHubRepository
+import com.hbworld.githubcpr.domain.model.ClosedPR
 
-class GithubRepositoryImpl(
+class GitHubRepositoryImpl(
     private val githubAPI: GithubAPI,
-    private val closedPRMapper: ListMapper<FetchCPRResponse, ClosedPR>
-) : GithubRepository {
+) :  BaseRepositoryImpl(), GitHubRepository {
 
-    override suspend fun getAllClosedPRs(): List<ClosedPR> {
-        return closedPRMapper.map(getAllPR())
-    }
-
+    override suspend fun getAllClosedPR(): Result<List<ClosedPR>> = performAPICall(
+        apiCall = { getAllPR() },
+        mapper = { ClosedPRMapper.map(it) }
+    )
 
     private suspend fun getAllPR(
         owner: String = "Hbworld",
