@@ -1,5 +1,7 @@
 package com.hbworld.githubcpr.di
 
+import com.hbworld.githubcpr.data.mapper.GitHubMapperImpl
+import com.hbworld.githubcpr.data.mapper.GithubMapper
 import com.hbworld.githubcpr.data.remote.GithubAPI
 import com.hbworld.githubcpr.data.remote.RetrofitClient
 import com.hbworld.githubcpr.data.repository.GitHubRepositoryImpl
@@ -27,14 +29,21 @@ object AppModule {
     @Provides
     fun provideGitHubRepository(
         githubAPI: GithubAPI,
+        githubMapper: GithubMapper
     ) : GitHubRepository {
-        return GitHubRepositoryImpl(githubAPI)
+        return GitHubRepositoryImpl(githubAPI, githubMapper)
     }
 
     @Singleton
     @Provides
     fun provideGithubAPI() : GithubAPI{
         return RetrofitClient.get().create(GithubAPI::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGithubMapper() : GithubMapper{
+        return GitHubMapperImpl()
     }
 
 }
