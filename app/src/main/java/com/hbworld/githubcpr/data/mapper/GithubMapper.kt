@@ -5,6 +5,5 @@ import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.domain.model.Results
 
 interface GithubMapper {
-
     fun mapToClosedPR(input : List<FetchCPRResponse>) : Results<List<ClosedPR>>
 }

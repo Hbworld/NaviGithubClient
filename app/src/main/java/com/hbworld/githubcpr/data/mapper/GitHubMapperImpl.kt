@@ -3,7 +3,6 @@ package com.hbworld.githubcpr.data.mapper
 import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
 import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.domain.model.Results
-import com.hbworld.githubcpr.util.DateUtil
 
 class GitHubMapperImpl : GithubMapper {
 
@@ -16,19 +15,17 @@ class GitHubMapperImpl : GithubMapper {
     }
 
 
-    private fun getClosedPR(input: FetchCPRResponse): ClosedPR {
-        return ClosedPR(
-            title = input.title,
-            createdAt = DateUtil.formatGithubDateToSimple(input.createdAt),
-            closedAt = DateUtil.formatGithubDateToSimple(input.closedAt),
-            id = input.number,
-            author = input.user.login,
-            authorImage = input.user.avatarUrl,
-        )
-    }
+    private fun getClosedPR(input: FetchCPRResponse): ClosedPR = ClosedPR(
+        title = input.title,
+        createdAt = input.simpleCreatedDate,
+        closedAt = input.simpleClosedDate,
+        id = input.number,
+        author = input.user.login,
+        authorImage = input.user.avatarUrl,
+    )
 
-    private fun <T> mapToResult(input: T): Results<T> {
-        return Results.success(input)
-    }
+
+    private fun <T> mapToResult(input: T): Results<T> = Results.success(input)
+
 
 }

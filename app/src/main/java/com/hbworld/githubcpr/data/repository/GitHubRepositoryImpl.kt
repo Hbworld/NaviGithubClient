@@ -10,7 +10,7 @@ import com.hbworld.githubcpr.domain.model.Results
 class GitHubRepositoryImpl(
     private val githubAPI: GithubAPI,
     private val githubMapper: GithubMapper
-) :  BaseRepositoryImpl(), GitHubRepository {
+) : BaseRepositoryImpl(), GitHubRepository {
 
     override suspend fun getAllClosedPR(): Results<List<ClosedPR>> = performAPICall(
         apiCall = { getAllPR() },
@@ -21,13 +21,9 @@ class GitHubRepositoryImpl(
         owner: String = "Hbworld",
         repo: String = "NaviGithubClient",
         state: String = "closed",
-    ): List<FetchCPRResponse> {
-        return githubAPI.fetchPullRequest(
-            owner = owner,
-            repo = repo,
-            state = state
-        )
-    }
-
-
+    ): List<FetchCPRResponse> = githubAPI.fetchPullRequest(
+        owner = owner,
+        repo = repo,
+        state = state
+    )
 }
