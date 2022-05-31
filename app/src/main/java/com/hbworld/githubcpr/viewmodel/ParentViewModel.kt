@@ -19,8 +19,9 @@ class ParentViewModel @Inject constructor(private val githubUseCase: GithubUseCa
         val results = MutableLiveData<Results<List<ClosedPR>>>()
         results.value = Results.loading()
         viewModelScope.launch(Dispatchers.IO) {
-            results.postValue(githubUseCase.getAllClosedPRs())
-            closedPRList.postValue(results.value!!.data)
+            val data = githubUseCase.getAllClosedPRs()
+            results.postValue(data)
+            closedPRList.postValue(data.data)
         }
         return results
     }

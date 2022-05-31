@@ -1,6 +1,6 @@
 package com.hbworld.githubcpr.data.repository
 
-import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
+import com.hbworld.githubcpr.data.dtos.FetchPRDto
 import com.hbworld.githubcpr.data.mapper.GithubMapper
 import com.hbworld.githubcpr.data.remote.GithubAPI
 import com.hbworld.githubcpr.domain.GitHubRepository
@@ -21,7 +21,7 @@ class GitHubRepositoryImpl(
         owner: String = "Hbworld",
         repo: String = "NaviGithubClient",
         state: String = "closed",
-    ): List<FetchCPRResponse> = githubAPI.fetchPullRequest(
+    ): List<FetchPRDto> = githubAPI.fetchPullRequest(
         owner = owner,
         repo = repo,
         state = state

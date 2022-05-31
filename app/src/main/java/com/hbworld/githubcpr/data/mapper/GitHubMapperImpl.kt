@@ -1,12 +1,12 @@
 package com.hbworld.githubcpr.data.mapper
 
-import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
+import com.hbworld.githubcpr.data.dtos.FetchPRDto
 import com.hbworld.githubcpr.domain.model.ClosedPR
 import com.hbworld.githubcpr.domain.model.Results
 
 class GitHubMapperImpl : GithubMapper {
 
-    override fun mapToClosedPR(input: List<FetchCPRResponse>): Results<List<ClosedPR>> = try {
+    override fun mapToClosedPR(input: List<FetchPRDto>): Results<List<ClosedPR>> = try {
         mapToResult(input.map {
             getClosedPR(it)
         })
@@ -15,7 +15,7 @@ class GitHubMapperImpl : GithubMapper {
     }
 
 
-    private fun getClosedPR(input: FetchCPRResponse): ClosedPR = ClosedPR(
+    private fun getClosedPR(input: FetchPRDto): ClosedPR = ClosedPR(
         title = input.title,
         createdAt = input.simpleCreatedDate,
         closedAt = input.simpleClosedDate,
