@@ -7,16 +7,16 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.hbworld.githubcpr.databinding.ActivityMainBinding
-import com.hbworld.githubcpr.util.DependencyUtil
-import com.hbworld.githubcpr.viewmodel.CustomViewModelFactory
+import com.hbworld.githubcpr.domain.model.ClosedPR
+import com.hbworld.githubcpr.domain.model.Results
 import com.hbworld.githubcpr.viewmodel.ParentViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var dataBinding: ActivityMainBinding
-    private val parentViewModel: ParentViewModel by viewModels {
-        CustomViewModelFactory(DependencyUtil.getGithubRepository())
-    }
+    private val parentViewModel: ParentViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +28,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchData() {
-        updateProgressBar(View.VISIBLE)
         parentViewModel.getAllClosedPR().observe(this) { result ->
             handleResult(result)
         }
     }
 
-    private fun handleResult(result: Result<Boolean>) {
-        updateProgressBar(View.GONE)
-        if (result.isFailure) Toast.makeText(this, R.string.fetch_error, Toast.LENGTH_LONG)
-            .show()
+    private fun handleResult(result: Results<List<ClosedPR>>) {
+        when (result.status) {
+            Results.Status.LOADING -> {
+                updateProgressBar(View.VISIBLE)
+            }
+            Results.Status.SUCCESS -> {
+                updateProgressBar(View.GONE)
+            }
+            Results.Status.ERROR -> {
+                updateProgressBar(View.GONE)
+                Toast.makeText(this, R.string.fetch_error, Toast.LENGTH_LONG)
+                    .show()
+            }
+        }
     }
 
     private fun updateProgressBar(visibility: Int) {

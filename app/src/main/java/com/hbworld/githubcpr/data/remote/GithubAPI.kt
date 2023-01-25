@@ -1,6 +1,6 @@
 package com.hbworld.githubcpr.data.remote
 
-import com.hbworld.githubcpr.data.dtos.FetchCPRResponse
+import com.hbworld.githubcpr.data.dtos.FetchPRDto
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -11,7 +11,7 @@ interface GithubAPI  {
     suspend fun fetchPullRequest(
         @Path("owner") owner : String,
         @Path("repo") repo : String,
-        @Query("state") state : String) : List<FetchCPRResponse>
+        @Query("state") state : String) : List<FetchPRDto>
 
 
 }
